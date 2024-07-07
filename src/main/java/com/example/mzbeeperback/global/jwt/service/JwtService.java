@@ -82,7 +82,10 @@ public class JwtService {
         Date now = new Date();
 
         //1시간
-        long accessTokenValidMilliSecond = 60 * 60 * 1000L;
+        //long accessTokenValidMilliSecond = 60 * 60 * 1000L;
+
+        // 1분
+        long accessTokenValidMilliSecond = 60 * 1000L;
 
         // https://passionfruit200.tistory.com/463
         return Jwts.builder()
@@ -195,6 +198,26 @@ public class JwtService {
     // refresh token 받아서 유효한지 확인하는 메소드
 
     // refresh token 인증 완료 후, 새로운 accessToken 발행하는 메소드
+
+    // 보내는 유저의 전화번호를 JWT에서 뽑아내는 메소드 필요
+    public int parseBeepNum(String jwt) {
+        byte [] secret = SECRET_KEY.getBytes();
+        Key key = Keys.hmacShaKeyFor(secret);
+        int numb = 0;
+        try {
+            Jws<Claims> claims = Jwts.parser()
+                    .verifyWith((SecretKey) key)
+                    .build()
+                    .parseSignedClaims(jwt);
+            System.out.println("parseBeepNum is working: " + claims.getPayload().get("beep_num"));
+            numb = (int) claims.getPayload().get("beep_num");
+        } catch (ExpiredJwtException e) {
+            e.printStackTrace();
+        } catch (JwtException e) {
+            e.printStackTrace();
+        }
+        return numb;
+    }
 
 
 }

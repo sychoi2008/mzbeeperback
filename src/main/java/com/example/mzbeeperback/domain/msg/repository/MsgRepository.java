@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface MsgRepository extends JpaRepository<MsgEntity, Integer> {
 
-    @Query(value = "INSERT INTO beepermsg values(:#{#msg.msg_date}, :#{#msg.msg}, :#{#msg.writer_num}, " +
+    @Query(value = "INSERT INTO beepermsg (msg_date, msg, writer_num, reader_num) values(:#{#msg.msg_date}, :#{#msg.msg}, :#{#msg.writer_num}, " +
             ":#{#msg.reader_num})",nativeQuery = true)
     @Transactional
     @Modifying

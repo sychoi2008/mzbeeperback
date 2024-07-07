@@ -48,6 +48,7 @@ public class LoginService {
             return tokenDTO = new TokenDTO(jwtService.crateAccessToken(userId, beep_num), jwtService.createRefreshToken(userId, beep_num));
         } else {
             System.out.println("not same");
+            // 같지 않았을 떄 팝업 메세지를 띄우던지 해야 함.
         }
 
         return tokenDTO;

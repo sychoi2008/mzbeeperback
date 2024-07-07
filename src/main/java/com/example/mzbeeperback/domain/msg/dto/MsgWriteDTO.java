@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MsgWriteDTO {
     int msg;
-    int writeNum;
+    //int writerNum;
     int readerNum;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     LocalDateTime send_date;
