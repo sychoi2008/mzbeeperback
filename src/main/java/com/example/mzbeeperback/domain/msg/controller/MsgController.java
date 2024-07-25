@@ -19,13 +19,15 @@ public class MsgController {
     }
 
     @PostMapping("/mzbeeper/send/msg")
-    public void sendMsg(@RequestHeader String accessToken, @RequestBody MsgWriteDTO msgWriteDTO) {
+    public void sendMsg(@RequestHeader("Authorization") String accessToken, @RequestBody MsgWriteDTO msgWriteDTO) {
 
         // if문으로 일단 accessToken을 확인한다.(아마도 isValid겠지??) 맞으면 service 메소드 실행, 아니라면 refreshtoken을 활용하거나 다시 발급
         //msgService.saveMsg(msgWriteDTO);
+        String real_accessToken = accessToken.replace("Bearer ", "");
+        System.out.println("MsgController : " + real_accessToken);
 
-        if(jwtService.isValid(accessToken)) {
-            msgService.saveMsg(accessToken, msgWriteDTO);
+        if(jwtService.isValid(real_accessToken)) {
+            msgService.saveMsg(real_accessToken, msgWriteDTO);
         } else {
             // 다시 로그인하라고 권장해야 하나...
             System.out.println("accessToken error");

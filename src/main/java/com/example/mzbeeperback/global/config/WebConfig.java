@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     //api도 path에 넣어줘야 한다.
     private static final String[] EXCLUDE_PATHS = {
-      "/mzbeeper", "/mzbeeper/signup", "/mzbeeper/welcome", "/mzbeeper/regist", "/mzbeeper/login"
+      "/mzbeeper", "/mzbeeper/signup", "/mzbeeper/welcome", "/mzbeeper/regist", "/mzbeeper/login", "/mzbeeper/refresh"
     };
 
     @Override
@@ -24,7 +24,9 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .exposedHeaders("*")
                 .allowedOrigins("http://localhost:3000")
-                .allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE");
+                .allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 
 
