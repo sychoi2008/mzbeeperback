@@ -92,10 +92,10 @@ public class JwtService {
         Date now = new Date();
 
         //1시간
-        //long accessTokenValidMilliSecond = 60 * 60 * 1000L;
+        long accessTokenValidMilliSecond = 60 * 60 * 1000L;
 
         // 1분 -> 원래는 1시간인데 테스트용으로 1분을 가져옴
-        long accessTokenValidMilliSecond = 60 * 1000L;
+        //long accessTokenValidMilliSecond = 60 * 1000L;
 
         // https://passionfruit200.tistory.com/463
         return Jwts.builder()
