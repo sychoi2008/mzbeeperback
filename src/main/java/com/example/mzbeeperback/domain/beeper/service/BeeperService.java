@@ -14,7 +14,7 @@ public class BeeperService {
     }
 
     // jwt토큰을 파싱한 나의 삐삐 번호를 파라미터 값으로 받는다
-    public int getMsg(int beeperNum) {
+    public String getMsg(int beeperNum) {
         return beeperRepository.getMyBeeperMsg(beeperNum);
     }
 }

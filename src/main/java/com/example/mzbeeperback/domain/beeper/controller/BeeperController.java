@@ -22,7 +22,7 @@ public class BeeperController {
 
     // 버튼 눌러서 최신 삐삐 메세지를 프론트에게 반환하기
     @GetMapping("/mybeeper/getmymsg")
-    public int getBeeperMsg(@RequestHeader("Authorization") String accessToken) {
+    public String getBeeperMsg(@RequestHeader("Authorization") String accessToken) {
         // jwt토큰을 통해 나의 삐삐 번호를 파싱한다 -> 후에 repository에서 값을 가져올 때 사용할 것
         String real_accessToken = accessToken.replace("Bearer ", "");
         System.out.println("beeperController : " + real_accessToken);

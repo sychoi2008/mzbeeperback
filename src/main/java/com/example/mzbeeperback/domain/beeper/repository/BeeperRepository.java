@@ -8,5 +8,5 @@ import org.springframework.data.repository.query.Param;
 public interface BeeperRepository extends JpaRepository<MsgEntity, Integer> {
 
     @Query(value = "select msg from beepermsg where reader_num = :beeperNum order by msg_date desc limit 1",nativeQuery = true)
-    int getMyBeeperMsg(@Param("beeperNum")int beeperNum);
+    String getMyBeeperMsg(@Param("beeperNum")int beeperNum);
 }

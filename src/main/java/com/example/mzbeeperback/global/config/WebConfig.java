@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     //api도 path에 넣어줘야 한다.
     private static final String[] EXCLUDE_PATHS = {
-      "/mzbeeper", "/mzbeeper/signup", "/mzbeeper/welcome", "/mzbeeper/regist", "/mzbeeper/login", "/mzbeeper/refresh"
+      "/mzbeeper", "/mzbeeper/signup", "/mzbeeper/welcome", "/mzbeeper/regist", "/mzbeeper/login", "/mzbeeper/refresh", "/mzbeeper/dict**"
     };
 
     @Override

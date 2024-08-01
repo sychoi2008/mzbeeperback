@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MsgWriteDTO {
-    int msg;
+    String msg;
     //int writerNum;
     int readerNum;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")

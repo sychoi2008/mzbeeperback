@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Entity
 public class MsgEntity {
 
-    public MsgEntity(int msg, int writer_num, int reader_num, LocalDateTime msg_date) {
+    public MsgEntity(String msg, int writer_num, int reader_num, LocalDateTime msg_date) {
         this.msg = msg;
         this.writer_num = writer_num;
         this.reader_num = reader_num;
@@ -27,7 +27,7 @@ public class MsgEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int msg_id;
 
-    int msg;
+    String msg;
 
     int writer_num;
 

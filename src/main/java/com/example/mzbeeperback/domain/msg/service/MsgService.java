@@ -21,7 +21,7 @@ public class MsgService {
     }
 
     public void saveMsg(String accessToken, MsgWriteDTO msgWriteDTO) {
-        int msgContent = msgWriteDTO.getMsg();
+        String msgContent = msgWriteDTO.getMsg();
         // jwt에서 보내는 사람 번호 추출하기
         //int writer = msgWriteDTO.getWriteNum();
         int writer = jwtService.parseBeepNum(accessToken);
