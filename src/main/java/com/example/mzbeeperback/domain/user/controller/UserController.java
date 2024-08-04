@@ -63,5 +63,4 @@ public class UserController {
     // 프론트엔드로부터 token을 전달 받아 claims 속 삐삐번호를 추출하고 그것을 토대로 삐삐를 확인할 때 가져오기
 
 
-
 }

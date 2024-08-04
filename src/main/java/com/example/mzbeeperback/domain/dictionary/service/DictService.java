@@ -16,7 +16,12 @@ public class DictService {
     }
 
     public DictDTO searchMSG(String msg_num) {
-        DictEntity dictEntity = dictRepository.getMsgMean(msg_num);
-        return new DictDTO(dictEntity.getDict_msg(), dictEntity.getDict_meant());
+        try {
+            DictEntity dictEntity = dictRepository.getMsgMean(msg_num);
+            return new DictDTO(dictEntity.getDict_msg(), dictEntity.getDict_meant());
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 }
