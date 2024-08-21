@@ -7,3 +7,8 @@
 ## 노력한 곳
 ### 1. 스프링 시큐리티 없이 로그인 및 jwt 발급 기능
 ### 2. 
+
+
+## 더 알아보기
+### 1. UUID
+https://www.baeldung.com/java-uuid
