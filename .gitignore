@@ -39,3 +39,9 @@ out/
 
 ### application.yml ###
 application.yml
+
+
+### gradle, gradlew ###
+.gradle/
+gradlew
+gradlew.bat
