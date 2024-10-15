@@ -12,3 +12,6 @@
 ## 더 알아보기
 ### 1. UUID
 https://www.baeldung.com/java-uuid
+
+## 리팩토링 예정
+1. JPA로 바꾸기 
