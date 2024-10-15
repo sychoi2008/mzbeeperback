@@ -14,4 +14,5 @@
 https://www.baeldung.com/java-uuid
 
 ## 리팩토링 예정
-1. JPA로 바꾸기 
+1. JPA로 바꾸기
+2. 객체지향스럽게 바꾸기 => 연관관계 사용
