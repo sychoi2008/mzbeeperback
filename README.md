@@ -1,3 +1,7 @@
+## 프로젝트의 목적
+1. 스프링 컨테이너와 빈 + CRUD
+2. jwt 로그인 방식 사용 -> 시큐리티 無 VS 시큐리티 有
+
 ## 프로젝트 구조
 <img width=500 src="https://postfiles.pstatic.net/MjAyNDA4MjFfMjYg/MDAxNzI0MjM0NTUzNjc5.QIEfGgbysrA2cXmXPqGcYOzDAzZO84K-hc8vdLZ-1Fog.8qnvdEr1QAZmgj5Fz7kqv33JZUhghqgRdFbzspKfdnkg.JPEG/Untitled_Design-001.jpg?type=w966" />
 
