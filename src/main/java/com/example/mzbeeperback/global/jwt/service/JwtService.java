@@ -53,21 +53,6 @@ public class JwtService {
             return false;
         }
 
-//        try {
-//            Claims claims = Jwts.parserBuilder()
-//                    .setSigningKey(key)
-//                    .build()
-//                    .parseClaimsJws(jwt)
-//                    .getBody();
-//            System.out.println("Id : " + claims.get("userId"));
-//        } catch (ExpiredJwtException e) {
-//            e.printStackTrace();
-//            return false;
-//        } catch (JwtException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//        return true;
     }
 
 
@@ -79,15 +64,11 @@ public class JwtService {
         headerMap.put("alg", "HS256");
 
 
-//        ClaimsBuilder claims = Jwts.claims();
-//        claims.add("id", userId);
         Map<String, Object> claims = new HashMap<String, Object>();
         claims.put("id", userId);
         //삐삐 번호도 담길 것을 고려해보기
         claims.put("beep_num", beepNum);
 
-//        Date expireTime = new Date();
-//        expireTime.setTime(expireTime.getTime() + 1000 * 60 * 1);
 
         Date now = new Date();
 
@@ -107,40 +88,6 @@ public class JwtService {
                 .signWith(key)
                 .compact();
 
-//        Map<String, Object> headerMap = new HashMap<String, Object>();
-//        headerMap.put("typ", "JWT");
-//        headerMap.put("alg", "HS256");
-//
-//
-//        Date now = new Date();
-//        Long expiration = 1000 * 60 * 60L;
-//
-//
-//        Claims claims = Jwts.claims();
-//        claims.put("userId", userId);
-//
-//        byte [] secret = SECRET_KEY.getBytes();
-//        Key key = Keys.hmacShaKeyFor(secret);
-//
-//        System.out.println(new Date(now.getTime() + expiration));
-//
-//        System.out.println("access " + Jwts.builder()
-//                .setHeaderParams(headerMap)
-//                .setSubject(ACCESS_TOKEN_SUBJECT)
-//                .setIssuedAt(now)
-//                .setExpiration(new Date(now.getTime() + expiration))
-//                .setClaims(claims)
-//                .signWith(key, SignatureAlgorithm.HS256)
-//                .compact());
-//
-//        return Jwts.builder()
-//                .setHeaderParams(headerMap)
-//                .setSubject(ACCESS_TOKEN_SUBJECT)
-//                .setIssuedAt(now)
-//                .setExpiration(new Date(now.getTime() + expiration))
-//                .setClaims(claims)
-//                .signWith(key, SignatureAlgorithm.HS256)
-//                .compact();
     }
 
 
@@ -169,40 +116,6 @@ public class JwtService {
                 .signWith(key)
                 .compact();
 
-//        Map<String, Object> headerMap = new HashMap<String, Object>();
-//        headerMap.put("typ", "JWT");
-//        headerMap.put("alg", "HS256");
-//
-//        //Date now = new Date(System.currentTimeMillis());
-//        Date now = new Date();
-//        Long expiration = 14 * 24 * 60 * 60 * 1000L;
-//
-//        Claims claims = Jwts.claims();
-//        claims.put("userId", userId);
-//
-//        byte [] secret = SECRET_KEY.getBytes();
-//        Key key = Keys.hmacShaKeyFor(secret);
-//        System.out.println("Key : " + key);
-//
-//        System.out.println(new Date(now.getTime() + expiration));
-//
-//        System.out.println("refresh " + Jwts.builder()
-//                .setHeaderParams(headerMap)
-//                .setSubject(REFRESH_TOKEN_SUBJECT)
-//                .setIssuedAt(now)
-//                .setExpiration(new Date(now.getTime() + expiration))
-//                .setClaims(claims)
-//                .signWith(key, SignatureAlgorithm.HS256)
-//                .compact());
-//
-//        return Jwts.builder()
-//                .setHeaderParams(headerMap)
-//                .setSubject(REFRESH_TOKEN_SUBJECT)
-//                .setIssuedAt(now)
-//                .setExpiration(new Date(now.getTime() + expiration))
-//                .setClaims(claims)
-//                .signWith(key, SignatureAlgorithm.HS256)
-//                .compact();
     }
 
     // refresh token 받아서 유효한지 확인하는 메소드
