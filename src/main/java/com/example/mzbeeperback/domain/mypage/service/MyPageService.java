@@ -7,6 +7,7 @@ import com.example.mzbeeperback.domain.mypage.entity.MySendEntity;
 import com.example.mzbeeperback.domain.mypage.repository.MyPageRepository;
 import com.example.mzbeeperback.domain.mypage.repository.MySendRepository;
 import com.example.mzbeeperback.global.jwt.service.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,28 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class MyPageService {
-    private MyPageRepository myPageRepository;
-    private JwtService jwtService;
-
-    private MySendRepository mySendRepository;
-
-    @Autowired
-    public MyPageService(MyPageRepository myPageRepository, JwtService jwtService, MySendRepository mySendRepository) {
-        this.myPageRepository = myPageRepository;
-        this.jwtService = jwtService;
-        this.mySendRepository = mySendRepository;
-
-    }
+    private final MyPageRepository myPageRepository;
+    private final JwtService jwtService;
+    private final MySendRepository mySendRepository;
 
     public MyPageDTO getMyInfo(String accessToken) {
         int beepNum = jwtService.parseBeepNum(accessToken);
 
         MyPageEntity myPageEntity = myPageRepository.getInfo(beepNum);
 
-        MyPageDTO myPageDTO = new MyPageDTO(myPageEntity.getBeep_num(), myPageEntity.getName());
-
-        return myPageDTO;
+        return new MyPageDTO(myPageEntity.getBeep_num(), myPageEntity.getName());
     }
 
     public List<MySendDTO> getMySend(String accessToken) {

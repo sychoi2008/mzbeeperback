@@ -1,6 +1,7 @@
 package com.example.mzbeeperback.domain.user.controller;
 
 import com.example.mzbeeperback.global.jwt.service.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,10 @@ import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequiredArgsConstructor
 public class RefreshController {
 
-    private JwtService jwtService;
-
-    @Autowired
-    public RefreshController (JwtService jwtService) {
-        this.jwtService = jwtService;
-    }
+    private final JwtService jwtService;
 
     @PostMapping("/mzbeeper/refresh")
     public ResponseEntity<Map<String, String>> refreshAccessToken(@RequestHeader("Authorization") String refreshTokenHeader) {

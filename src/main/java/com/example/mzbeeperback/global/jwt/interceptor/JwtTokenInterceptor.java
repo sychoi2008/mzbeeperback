@@ -33,7 +33,7 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
         } catch (ExpiredJwtException e) { // jwt 토큰이 만료되었을 때
             sendErrorResponse(response, "토큰 만료 헤헤");
             return false;
-        } catch (Exception e) {
+        } catch (Exception e) { // 그 이외의 모든 예외를 처리한다 : ex) 이 서버에서 만든 JWT가 아닌데? 등등
             sendErrorResponse(response, "Invalid Token");
             return false;
         }

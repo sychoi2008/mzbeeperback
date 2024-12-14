@@ -3,17 +3,14 @@ package com.example.mzbeeperback.domain.dictionary.service;
 import com.example.mzbeeperback.domain.dictionary.dto.DictDTO;
 import com.example.mzbeeperback.domain.dictionary.entity.DictEntity;
 import com.example.mzbeeperback.domain.dictionary.repository.DictRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class DictService {
-    private DictRepository dictRepository;
-
-    @Autowired
-    public DictService(DictRepository dictRepository) {
-        this.dictRepository = dictRepository;
-    }
+    private final DictRepository dictRepository;
 
     public DictDTO searchMSG(String msg_num) {
         try {

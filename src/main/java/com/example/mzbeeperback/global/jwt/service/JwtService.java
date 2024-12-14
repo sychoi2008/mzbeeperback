@@ -29,11 +29,11 @@ public class JwtService {
     public boolean isValid(String jwt) {
         byte [] secret = SECRET_KEY.getBytes();
         Key key = Keys.hmacShaKeyFor(secret);
-            // 파싱하기만 해도 만료되었는지 확인됨
+            // 파싱하기만 해도 만료되었는지 그리고 이 서버에서 발급한 jwt인지를 확인하고 아니라면 예외를 던진다
             Jws<Claims> claims = Jwts.parser()
-                    .verifyWith((SecretKey) key)
-                    .build()
-                    .parseSignedClaims(jwt);
+                    .verifyWith((SecretKey) key) // 서명했던 key
+                    .build() // 파싱한다
+                    .parseSignedClaims(jwt); // 서명 검증
 
             // 여기까지 내려왔다는 것은 만료되지 않았다는 것
             return true;

@@ -4,21 +4,17 @@ import com.example.mzbeeperback.domain.msg.dto.MsgWriteDTO;
 import com.example.mzbeeperback.domain.msg.entity.MsgEntity;
 import com.example.mzbeeperback.domain.msg.repository.MsgRepository;
 import com.example.mzbeeperback.global.jwt.service.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class MsgService {
-    private MsgRepository msgRepository;
-    private JwtService jwtService;
-
-    @Autowired
-    public MsgService(MsgRepository msgRepository, JwtService jwtService) {
-        this.msgRepository = msgRepository;
-        this.jwtService = jwtService;
-    }
+    private final MsgRepository msgRepository;
+    private final JwtService jwtService;
 
     public void saveMsg(String accessToken, MsgWriteDTO msgWriteDTO) {
         String msgContent = msgWriteDTO.getMsg();
