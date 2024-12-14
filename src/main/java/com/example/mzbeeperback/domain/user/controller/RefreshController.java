@@ -28,13 +28,15 @@ public class RefreshController {
     public ResponseEntity<Map<String, String>> refreshAccessToken(@RequestHeader("Authorization") String refreshTokenHeader) {
         String refreshToken = refreshTokenHeader.replace("Bearer ", "");
 
-        if(jwtService.isRefreshTokenValid(refreshToken)) {
+        if(jwtService.isValid(refreshToken)) {
             String newAccessToken = jwtService.generateNewAccessToken(refreshToken);
             Map<String, String> response = new HashMap<>();
             response.put("accessToken", newAccessToken);
             return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("error", "Invalid refresh token"));
+            return ResponseEntity.status(HttpStatus.TEMPORARY_REDIRECT)
+                    .header("location", "/mzbeeper")
+                    .body(Collections.singletonMap("error", "Invalid refresh token"));
         }
     }
 

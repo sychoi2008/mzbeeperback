@@ -4,21 +4,18 @@ package com.example.mzbeeperback.domain.beeper.controller;
 import com.example.mzbeeperback.domain.beeper.dto.BeeperDTO;
 import com.example.mzbeeperback.domain.beeper.service.BeeperService;
 import com.example.mzbeeperback.global.jwt.service.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequiredArgsConstructor
 public class BeeperController {
 
-    private BeeperService beeperService;
-    private JwtService jwtService;
+    private final BeeperService beeperService;
+    private final JwtService jwtService;
 
-    @Autowired
-    public BeeperController(BeeperService beeperService, JwtService jwtService) {
-        this.beeperService = beeperService;
-        this.jwtService = jwtService;
-    }
 
     // 버튼 눌러서 최신 삐삐 메세지를 프론트에게 반환하기
     @GetMapping("/mybeeper/getmymsg")
