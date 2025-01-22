@@ -3,20 +3,16 @@ package com.example.mzbeeperback.domain.msg.controller;
 import com.example.mzbeeperback.domain.msg.dto.MsgWriteDTO;
 import com.example.mzbeeperback.domain.msg.service.MsgService;
 import com.example.mzbeeperback.global.jwt.service.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequiredArgsConstructor
 public class MsgController {
-    private MsgService msgService;
-    private JwtService jwtService;
-
-    @Autowired
-    public MsgController(MsgService msgService, JwtService jwtService) {
-        this.msgService = msgService;
-        this.jwtService = jwtService;
-    }
+    private final MsgService msgService;
+    private final JwtService jwtService;
 
     @PostMapping("/mzbeeper/send/msg")
     public void sendMsg(@RequestHeader("Authorization") String accessToken, @RequestBody MsgWriteDTO msgWriteDTO) {

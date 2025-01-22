@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Slf4j
 public class JwtService {
 
@@ -29,42 +29,26 @@ public class JwtService {
     public boolean isValid(String jwt) {
         byte [] secret = SECRET_KEY.getBytes();
         Key key = Keys.hmacShaKeyFor(secret);
-
-        try {
+            // 파싱하기만 해도 만료되었는지 그리고 이 서버에서 발급한 jwt인지를 확인하고 아니라면 예외를 던진다
             Jws<Claims> claims = Jwts.parser()
-                    .verifyWith((SecretKey) key)
-                    .build()
-                    .parseSignedClaims(jwt);
-            System.out.println("claims : " + claims);
-            System.out.println("Id : " + claims.getPayload().get("id"));
-            return true;
-        } catch (ExpiredJwtException e) {
-            //e.printStackTrace();
-//            log.error("Token is expired");
-//            return false;
-            log.error("Token is expired");
-            //throw e;
-            return false;
-        } catch (JwtException e) {
-//            e.printStackTrace();
-//            return false;
-            log.error("JWTException");
-            //throw e;
-            return false;
-        }
+                    .verifyWith((SecretKey) key) // 서명했던 key
+                    .build() // 파싱한다
+                    .parseSignedClaims(jwt); // 서명 검증
 
+            // 여기까지 내려왔다는 것은 만료되지 않았다는 것
+            return true;
     }
 
 
     public String crateAccessToken(String userId, int beepNum) {
         byte [] secret = SECRET_KEY.getBytes();
         Key key = Keys.hmacShaKeyFor(secret);
-        Map<String, Object> headerMap = new HashMap<String, Object>();
+        Map<String, Object> headerMap = new HashMap<>();
         headerMap.put("typ", "JWT");
         headerMap.put("alg", "HS256");
 
 
-        Map<String, Object> claims = new HashMap<String, Object>();
+        Map<String, Object> claims = new HashMap<>();
         claims.put("id", userId);
         //삐삐 번호도 담길 것을 고려해보기
         claims.put("beep_num", beepNum);
@@ -107,6 +91,9 @@ public class JwtService {
         // 14일
         long refreshTokenValidMilliSecond = 14 * 24 * 60 * 60 * 1000L;
 
+        // 테스트용 1분
+        //long refreshTokenValidMilliSecond = 60 * 1000L;
+
         return Jwts.builder()
                 .header().empty().add(headerMap).and()
                 .claims().empty().add(claims).and()
@@ -118,26 +105,24 @@ public class JwtService {
 
     }
 
-    // refresh token 받아서 유효한지 확인하는 메소드
-    public boolean isRefreshTokenValid(String refreshToken) {
-        return isValid(refreshToken);
-    }
+
 
     // refresh token 인증 완료 후, 새로운 accessToken 발행하는 메소드
     public String generateNewAccessToken(String refreshToken) {
         byte [] secret = SECRET_KEY.getBytes();
         Key key = Keys.hmacShaKeyFor(secret);
 
+        // refresh token 해체
         Jws<Claims> claims = Jwts.parser()
                 .verifyWith((SecretKey) key)
                 .build()
                 .parseSignedClaims(refreshToken);
 
+        // 거기서 id(로그인 할 때 사용되는 거) 와 beep_num 빼기
         String id = (String) claims.getPayload().get("id");
-        int beepnum = (int) claims.getPayload().get("beep_num");
+        int beepNum = (int) claims.getPayload().get("beep_num");
 
-        String newAccessToken = crateAccessToken(id, beepnum);
-        return newAccessToken;
+        return crateAccessToken(id, beepNum);
 
     }
 

@@ -28,42 +28,19 @@ public class JwtTokenInterceptor implements HandlerInterceptor { // HandlerInter
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            return true;
-        }
-
-//        final String accessToken = request.getHeader("accessToken");
-//        final String refreshToken = request.getHeader("refreshToken");
-//
-//        System.out.println("request.getHeader() : "+ accessToken);
-//        //bearer를 처리해줘야할듯?
         final String authorizationHeader = request.getHeader("Authorization");
-        String accessToken = null;
+        if(authorizationHeader == null) return false;
 
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            accessToken = authorizationHeader.substring(7); // "Bearer " 이후의 토큰 값만 추출
-            System.out.println("JwtInterceptor : "+ accessToken);
-        }
+        // 정상토큰
+        // Bearer 뒤에 있는 JWT 토큰을 parsing 하기
+        String accessToken = authorizationHeader.substring(7); // "Bearer " 이후의 토큰 값만 추출
 
         try { // 유효한 accessToken과 refreshToken 이라면 이 곳에서 처리가 된다
-            if(accessToken!=null && jwtService.isValid(accessToken)) { // 엑서스 토큰이 유효함 -> 거의 대부분의 요청이 jwt가 유효하다면 여기서 걸러질 것
-                System.out.println("Token : "+ accessToken);
-                System.out.println("True");
-                return true;
-            }
-//            else if(refreshToken != null && jwtService.isRefreshTokenValid(refreshToken)){ // 리프레시 토큰이 유효한지 체크 -> 재발급의 과정
-//                String newAcessToken = jwtService.generateNewAccessToken(refreshToken);
-//                response.setHeader("accessToken", newAcessToken);
-//                return true;
-//            }
-            else { // accesstoken이 이상할 때 (ex : 토큰이 없을 때)
-                sendErrorResponse(response, "Invalid or missing token");
-                return false;
-            }
+            return jwtService.isValid(accessToken);
         } catch (ExpiredJwtException e) { // jwt 토큰이 만료되었을 때
-            sendErrorResponse(response, "Token expired");
+            sendErrorResponse(response, "토큰 만료 헤헤");
             return false;
-        } catch (Exception e) {
+        } catch (Exception e) { // 그 이외의 모든 예외를 처리한다 : ex) 이 서버에서 만든 JWT가 아닌데? 등등
             sendErrorResponse(response, "Invalid Token");
             return false;
         }
