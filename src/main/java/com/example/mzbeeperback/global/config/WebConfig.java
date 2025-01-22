@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer { // 스프링이 제공하는 대부분의 기능 이외에 기능을 확장하는 것 = WebMvcOnfigurer를 상속받기
 
     //@RequiredArgsConstructor가 반드시 필요함
     private final JwtTokenInterceptor jwtTokenInterceptor;
@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
     };
 
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
+    public void addCorsMappings(CorsRegistry registry) { // 코스 맵핑을 더 추가하기 
         registry.addMapping("/**")
                 .exposedHeaders("*")
                 .allowedOrigins("http://localhost:3000")
