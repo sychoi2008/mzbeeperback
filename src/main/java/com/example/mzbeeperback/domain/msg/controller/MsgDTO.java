@@ -1,4 +1,4 @@
-package com.example.mzbeeperback.domain.msg.dto;
+package com.example.mzbeeperback.domain.msg.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,9 +12,8 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MsgWriteDTO {
+public class MsgDTO {
     String msg;
-    //int writerNum;
     int readerNum;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     LocalDateTime send_date;

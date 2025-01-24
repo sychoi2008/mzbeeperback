@@ -1,45 +1,48 @@
 package com.example.mzbeeperback.domain.user.controller;
 
-import com.example.mzbeeperback.domain.user.dto.UserLoginDTO;
-import com.example.mzbeeperback.domain.user.dto.UserSignUpDTO;
-import com.example.mzbeeperback.domain.user.service.LoginService;
-import com.example.mzbeeperback.domain.user.service.SignUpService;
-import com.example.mzbeeperback.global.jwt.dto.TokenDTO;
+import com.example.mzbeeperback.domain.user.controller.dto.LoginDTO;
+import com.example.mzbeeperback.domain.user.controller.dto.MyPageDTO;
+import com.example.mzbeeperback.domain.user.controller.dto.SignUpDTO;
+import com.example.mzbeeperback.domain.user.service.UserService;
+import com.example.mzbeeperback.global.jwt.controller.dto.TokenDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.NoSuchAlgorithmException;
-
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
-    private final SignUpService signUpService;
-    private final LoginService loginService;
+    private final UserService userService;
 
-    @PostMapping("/mzbeeper/regist")
-    public void registMB(@RequestBody UserSignUpDTO userSignUpDTO) {
-        //service의 메소드로 넘겨준다.
-        signUpService.saveUser(userSignUpDTO);
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/mzbeeper/save")
+    public void saveUser(@RequestBody SignUpDTO signUpDTO) {
+        userService.saveUser(signUpDTO);
     }
 
-    @ResponseStatus(HttpStatus.OK)
     @PostMapping("/mzbeeper/login")
-    public ResponseEntity<String> login(@RequestBody UserLoginDTO userLoginDTO) throws NoSuchAlgorithmException {
-        String userId = userLoginDTO.getUserId();
-        String userPwd = userLoginDTO.getUserPwd();
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
 
-        TokenDTO tokenDTO = loginService.tryLogin(userId, userPwd);
-        //헤더에 token을 넣어서 전달함.
+        TokenDTO tokenDTO = userService.login(loginDTO);
+
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("accessToken", tokenDTO.getAccessToken());
         responseHeaders.set("refreshToken", tokenDTO.getRefreshToken());
 
-        return ResponseEntity.ok().headers(responseHeaders).body("Response with header using ResponseEntity");
+        return ResponseEntity.ok().headers(responseHeaders).body("login 성공. 토큰 발행");
+    }
+
+    // 마이페이지에서 내 정보 가져오기
+    @GetMapping("/mzbeeper/myinfo")
+    public MyPageDTO getMyInfo(@RequestHeader("Authorization") String accessToken) {
+        String real_accessToken = accessToken.replace("Bearer ", "");
+        log.info("accessToken={}",real_accessToken);
+
+        return userService.findMyInfo(real_accessToken);
     }
 
 

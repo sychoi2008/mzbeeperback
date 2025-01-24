@@ -6,12 +6,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.io.IOException;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @Component
 @RequiredArgsConstructor
 public class JwtTokenInterceptor implements HandlerInterceptor {
