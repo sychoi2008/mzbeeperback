@@ -1,4 +1,4 @@
-package com.example.mzbeeperback.domain.user.dto;
+package com.example.mzbeeperback.domain.user.controller.dto;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserLoginDTO {
+public class LoginDTO {
     String userId;
     String userPwd;
 }

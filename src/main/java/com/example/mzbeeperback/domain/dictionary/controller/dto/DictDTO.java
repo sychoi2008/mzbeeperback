@@ -1,4 +1,4 @@
-package com.example.mzbeeperback.domain.dictionary.dto;
+package com.example.mzbeeperback.domain.dictionary.controller.dto;
 
 import lombok.*;
 

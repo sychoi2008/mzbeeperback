@@ -1,10 +1,9 @@
 package com.example.mzbeeperback.domain.dictionary.service;
 
-import com.example.mzbeeperback.domain.dictionary.dto.DictDTO;
+import com.example.mzbeeperback.domain.dictionary.controller.dto.DictDTO;
 import com.example.mzbeeperback.domain.dictionary.entity.DictEntity;
 import com.example.mzbeeperback.domain.dictionary.repository.DictRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

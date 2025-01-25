@@ -1,4 +1,4 @@
-package com.example.mzbeeperback.domain.user.dto;
+package com.example.mzbeeperback.domain.user.controller.dto;
 
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class UserSignUpDTO {
+public class SignUpDTO {
     String name;
     String id;
     String hash_pwd;
