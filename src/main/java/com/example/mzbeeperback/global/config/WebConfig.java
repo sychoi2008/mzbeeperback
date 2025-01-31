@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer { // 스프링이 제공하�
 
 
     private static final String[] EXCLUDE_PATHS = {
-            "/mzbeeper/save", "/mzbeeper/login", "/mzbeeper/refresh", "/mzbeeper/dict**"
+            "/mzbeeper/save", "/mzbeeper/login", "/mzbeeper/refresh"
     };
 
     @Override

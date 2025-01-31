@@ -1,25 +1,36 @@
 package com.example.mzbeeperback.domain.dictionary.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.mzbeeperback.domain.dictionary.controller.dto.AddDictDTO;
+import com.example.mzbeeperback.domain.user.entity.User;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "beeperdict")
 @Entity
-public class DictEntity {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Dictionary {
+
     @Id
-    int dict_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    String dict_msg;
+    @Column(name = "dict_msg")
+    String dictMsg;
 
-    String dict_meant;
+    @Column(name = "dict_meant")
+    String dictMeant;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User writer;
+
+    public Dictionary(AddDictDTO addDictDTO, User user) {
+        this.dictMsg = addDictDTO.getMsg();
+        this.dictMeant = addDictDTO.getMeaning();
+        this.writer = user;
+    }
 
 }
