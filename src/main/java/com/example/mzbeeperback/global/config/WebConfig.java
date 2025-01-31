@@ -26,6 +26,7 @@ public class WebConfig implements WebMvcConfigurer { // 스프링이 제공하�
                 .allowedOrigins("http://localhost:3000")
                 .allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
+                .exposedHeaders("accessToken")
                 .allowCredentials(true);
     }
 

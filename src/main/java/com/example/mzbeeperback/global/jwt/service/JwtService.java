@@ -1,9 +1,7 @@
 package com.example.mzbeeperback.global.jwt.service;
 
 
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
+import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,10 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Slf4j
@@ -29,16 +24,6 @@ public class JwtService {
 
     // Token이 유효한지 판별
     public Boolean isValid(String jwt) {
-//        byte [] secret = SECRET_KEY.getBytes();
-//        Key key = Keys.hmacShaKeyFor(secret);
-//            // 파싱하기만 해도 만료되었는지 그리고 이 서버에서 발급한 jwt인지를 확인하고 아니라면 예외를 던진다
-//            Jws<Claims> claims = Jwts.parser()
-//                    .verifyWith((SecretKey) key) // 서명했던 key
-//                    .build() // 파싱한다
-//                    .parseSignedClaims(jwt); // 서명 검증
-//
-//            // 여기까지 내려왔다는 것은 만료되지 않았다는 것
-//            return true;
         return !Jwts.parser()
                 .verifyWith(secretKey) // 서명 검증(이 서버에서 만든 토큰이니?) -> 아니라면 JwtException 발생
                 .build()
