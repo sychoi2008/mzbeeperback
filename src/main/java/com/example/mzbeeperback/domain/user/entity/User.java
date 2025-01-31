@@ -1,5 +1,6 @@
 package com.example.mzbeeperback.domain.user.entity;
 
+import com.example.mzbeeperback.domain.dictionary.entity.Likey;
 import com.example.mzbeeperback.domain.msg.entity.Message;
 import com.example.mzbeeperback.domain.user.controller.dto.SignUpDTO;
 import jakarta.persistence.*;
@@ -38,6 +39,7 @@ public class User {
 
     @Column(name = "create_date")
     private LocalDateTime createDate;
+
 
     public User(SignUpDTO dto, int number) {
         userId = dto.getId();
