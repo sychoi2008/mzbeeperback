@@ -29,12 +29,6 @@ public class DictService {
     private final LikeyRepository likeyRepository;
 
     public List<DictDTO> searchMsgCode(String accessToken, String code) {
-//        try {
-//            Dictionary dictionary = dictRepository.getMsgMean(code);
-//            return new DictDTO(dictionary.getDict_msg(), dictionary.getDict_meant());
-//        } catch (Exception e) {
-//            return null;
-//        }
         int beepNum = jwtService.parseBeepNum(accessToken);
         User findUser = userRepository.findByBeeperNum(beepNum);
 
