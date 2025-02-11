@@ -65,7 +65,7 @@ public class UserService {
             // 실험
             // 10분 : 600000L, 하루 : 86400000L
 
-            String access = jwtService.createToken(user.getUserId(), user.getBeeperNum(), 60000L);
+            String access = jwtService.createToken(user.getUserId(), user.getBeeperNum(), 600000L);
             String refresh = jwtService.createToken(user.getUserId(), user.getBeeperNum(), 86400000L);
 
             return new TokenDTO(access, refresh);
